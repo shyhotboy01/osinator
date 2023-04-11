@@ -2,11 +2,12 @@
 """
 Copyright (c) 2019 - present AppSeed.us
 """
-import vt
+
 import shodan
 import json
 import geocoder
 import folium
+import vt 
 from flask_login import login_required
 from flask import Flask, render_template, url_for, request, render_template_string, session
 from flask import render_template, redirect, request, url_for
