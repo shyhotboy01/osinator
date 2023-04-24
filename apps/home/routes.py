@@ -1,12 +1,14 @@
-# -*- encoding: utf-8 -*-
 """
 Copyright (c) 2019 - present AppSeed.us
 """
+from __future__ import annotations
 
-from apps.home import blueprint
-from flask import render_template, request
+from flask import render_template
+from flask import request
 from flask_login import login_required
 from jinja2 import TemplateNotFound
+
+from apps.home import blueprint
 
 
 @blueprint.route('/index')
@@ -14,6 +16,8 @@ from jinja2 import TemplateNotFound
 def index():
 
     return render_template('home/index.html', segment='index')
+
+# example
 
 
 @blueprint.route('/<template>')
@@ -29,12 +33,12 @@ def route_template(template):
         segment = get_segment(request)
 
         # Serve the file (if exists) from app/templates/home/FILE.html
-        return render_template("home/" + template, segment=segment)
+        return render_template('home/' + template, segment=segment)
 
     except TemplateNotFound:
         return render_template('home/page-404.html'), 404
 
-    except:
+    except Exception:
         return render_template('home/page-500.html'), 500
 
 
@@ -50,5 +54,5 @@ def get_segment(request):
 
         return segment
 
-    except:
+    except Exception:
         return None
