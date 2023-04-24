@@ -64,7 +64,7 @@ more-itertools==8.10.0
 multidict==6.0.4
 netifaces==0.11.0
 numpy==1.24.3
-oauthlib==3.2.0
+oauthlib==3.2.2
 olefile==0.46
 paramiko==2.9.3
 pexpect==4.8.0
