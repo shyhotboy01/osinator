@@ -8,7 +8,7 @@
 {% block content %}
 
   <div class="min-height-300 bg-primary position-absolute w-100"></div>
-    
+
   {% include "includes/sidenav.html" %}
 
   <main class="main-content position-relative border-radius-lg ">
@@ -26,7 +26,7 @@
                   <div class="numbers">
                     <p class="text-sm mb-0 text-uppercase font-weight-bold">MITRE ATT&CK</p>
                     <h5 class="font-weight-bolder">
-                     <a href="https://attack.mitre.org/">MITRE</a> 
+                     <a href="https://attack.mitre.org/">MITRE</a>
                     </h5>
                   </div>
                 </div>
@@ -89,7 +89,7 @@
                   <div class="numbers">
                     <p class="text-sm mb-0 text-uppercase font-weight-bold">Github</p>
                     <h5 class="font-weight-bolder">
-                      <a href="https://github.com/shyhotboy1/OSINTNATOR">Github Project</a>
+                      <a href="https://github.com/shyhotboy01/osinator">Github Project</a>
                     </h5>
                   </div>
                 </div>
@@ -104,7 +104,7 @@
         </div>
       </div>
       <div class="content" style="margin-top: 120px;">
-        <h1 style="text-align: center">VirusTotal</h1>        
+        <h1 style="text-align: center">VirusTotal</h1>
         <h4 style="text-align: center">Investiga la URL</h4>
         <div class="form text-center" style="margin-top: 20px;">
             <form action="/" method="POST">
@@ -128,7 +128,7 @@
                 {% endfor %}
           </tr>
         </tbody>
-      </table> 
+      </table>
 
 
         </div>
@@ -136,19 +136,19 @@
         </script>
         <div class="gcse-search"><button type="button" class="btn btn-primary">Primary</button></div>
     </div>
-    
+
 
       {% include "includes/footer.html" %}
 
     </div>
-  
-  </main>  
+
+  </main>
 
 {% endblock content %}
 
-<!-- Specific JS goes HERE --> 
+<!-- Specific JS goes HERE -->
 {% block javascripts %}
-  
+
   <script src="{{ config.ASSETS_ROOT }}/js/plugins/chartjs.min.js"></script>
   <script>
     var ctx1 = document.getElementById("chart-line").getContext("2d");
