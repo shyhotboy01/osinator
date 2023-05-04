@@ -31,8 +31,9 @@ SHODAN_API_KEY = "CMvpTE95D2drxmkjmYAELhXepcAqdl3M"
 shodan_api = shodan.Shodan(SHODAN_API_KEY)
 
 
+# TODO Comments to clarify everything
 
-@blueprint.route('/', methods=['POST', 'GET'])
+@blueprint.route('/', methods=['POST', 'GET']) # VirusTotal
 def route_default():
     if request.method == 'POST':
         submmited = request.form['content'] # La variable refiere a la barra de index.html donde insertamos la URL a analizar
@@ -50,6 +51,7 @@ def route_default():
     else:
         return redirect(url_for('authentication_blueprint.login'))
 
+# Search Bar
 @blueprint.route('/home/search.html')
 def search():
     return render_template(template_name_or_list='/home/search.html')
