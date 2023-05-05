@@ -38,6 +38,7 @@ $ cd osinator
 ```bash
 $ virtualenv env
 $ source env/bin/activate
+$ pip3 install flask flask_migrate flask_login flask_minify shodan geocoder folium vt-py flask_wtf email_validator pre-commit
 $ pip3 install -r requirements.txt
 ```
 
@@ -107,6 +108,20 @@ By default, the app redirects guest users to authenticate. In order to access th
   - `http://127.0.0.1:5000/register`
 - Access the `sign in` page and authenticate
   - `http://127.0.0.1:5000/login`
+
+<br />
+
+
+<br />
+
+## ✨ Pre-Commits
+
+For Pre-Commits use this commands
+
+```bash
+$ git add . | pre-commit
+```
+This will ensure you passed all the requirements in Dev Phases
 
 <br />
 
