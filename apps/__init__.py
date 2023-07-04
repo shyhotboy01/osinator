@@ -27,7 +27,7 @@ def register_blueprints(app):
 
 
 def configure_database(app):
-#Database
+#Database_Change
     @app.before_request
     def initialize_database():
         try:
