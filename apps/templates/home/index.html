@@ -3,7 +3,38 @@
 {% block title %} Dashboard {% endblock title %}
 
 <!-- Specific CSS goes HERE -->
-{% block stylesheets %}{% endblock stylesheets %}
+{% block stylesheets %}
+<!--Estilos para los inputs del form y los resultados-->
+<style>
+  input[type="submit"]{
+    background-color: #2dcea8;
+    border: 1px solid #0d6dfd96;
+    border-radius: 5px;
+    color: white;
+  }
+  #content{
+    border-radius: 5px;
+  }
+  th{
+    color: white !important;
+  }
+  #harmless{
+    background-color: green;
+  }
+  #malicious{
+    background-color: red;
+  }
+  #suspicious{
+    background-color: yellow;
+  } 
+  #undetected{
+    background-color: gray;
+  } 
+  #timeout{
+    background-color: blue;
+  }
+</style>
+{% endblock stylesheets %}
 
 {% block content %}
 
@@ -108,29 +139,28 @@
         <h4 style="text-align: center">Investiga la URL</h4>
         <div class="form text-center" style="margin-top: 20px;">
             <form action="/" method="POST">
-                <input type="text" name="content" id="content" style="border-radius: 7px;">
+                <input type="text" name="content" id="content">
                 <input type="submit" value="Search URL">
             </form>
-            <h2 style="text-align: center; margin-top: 20px;">Resultados</h2>
-
-      <table class="table">
-        <thead>
-          <tr>
-            {% for columnas in columns %}
-            <th scope="col">{{ columnas }}</th>
-            {% endfor %}
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-                 {% for key in score%}
-                <td>{{ key }}</td>
+        </div>
+        <div  id="resultados" class="text-center" style="margin-top: 20px;">
+          <h2 style="text-align: center; margin-top: 20px;">Resultados</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                {% for columnas in columns %}
+                <th scope="col" id="{{ columnas }}">{{ columnas }}</th>
                 {% endfor %}
-          </tr>
-        </tbody>
-      </table>
-
-
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                    {% for key in score%}
+                    <td>{{ key }}</td>
+                    {% endfor %}
+              </tr>
+            </tbody>
+          </table>
         </div>
         <script async src="https://cse.google.com/cse.js?cx=67b9794b26ab64aa8">
         </script>
@@ -148,7 +178,19 @@
 
 <!-- Specific JS goes HERE -->
 {% block javascripts %}
-
+  <!--script para hacer visible los resultados-->
+  <script>
+    document.addEventListener("DOMContentLoaded",()=>{
+      inicio();
+    });
+    const resultado = document.getElementById("resultados");
+    function inicio(){
+      resultado.style.display = 'none';
+      document.querySelector('input[type="submit"]').addEventListener('click',()=>{
+        resultado.style.display = 'block';
+      })
+    }
+  </script>
   <script src="{{ config.ASSETS_ROOT }}/js/plugins/chartjs.min.js"></script>
   <script>
     var ctx1 = document.getElementById("chart-line").getContext("2d");
