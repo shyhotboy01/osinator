@@ -16,7 +16,8 @@
     border-radius: 5px;
   }
   th{
-    color: white !important;
+    color: white;
+    text-transform: uppercase;
   }
   #harmless{
     background-color: green;
@@ -25,7 +26,7 @@
     background-color: red;
   }
   #suspicious{
-    background-color: yellow;
+    background-color: #d1d104;
   } 
   #undetected{
     background-color: gray;
@@ -145,6 +146,9 @@
         </div>
         <div  id="resultados" class="text-center" style="margin-top: 20px;">
           <h2 style="text-align: center; margin-top: 20px;">Resultados</h2>
+          {% for url in submmited %}
+            <h2 style="text-align: center; margin-top: 20px;">{{ url }}</h2> 
+          {% endfor %}
           <table class="table">
             <thead>
               <tr>
@@ -184,10 +188,14 @@
       inicio();
     });
     const resultado = document.getElementById("resultados");
+
     function inicio(){
-      resultado.style.display = 'none';
-      document.querySelector('input[type="submit"]').addEventListener('click',()=>{
+      if(!document.querySelector('th')){
+        resultado.style.display = 'none';
+      }
+      document.querySelector('input[type="submit"]').addEventListener('click',e=>{
         resultado.style.display = 'block';
+        
       })
     }
   </script>
