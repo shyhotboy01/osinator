@@ -14,7 +14,7 @@ $comment = Read-Host -Prompt 'Enter a commit message'
 git commit -m $comment
 
 # Push the committed changes to the remote repository
-git push https://github.com/shyhotboy01/osinator
+git push https://github.com/shyhotboy01/osinator main
 
 # Note: Replace 'origin' with the appropriate remote name if necessary.
 
