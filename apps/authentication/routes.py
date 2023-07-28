@@ -28,7 +28,7 @@ SHODAN_API_KEY = "CMvpTE95D2drxmkjmYAELhXepcAqdl3M"
 shodan_api = shodan.Shodan(SHODAN_API_KEY)
 
 
-# TODO Comments to clarify everything
+
 
 
 @blueprint.route("/", methods=["POST", "GET"])  # VirusTotal
@@ -146,6 +146,13 @@ def scan():
             return "Error"
     else:
         return render_template("/home/tables.html")
+    
+# Intel X
+
+@blueprint.route("/")
+def intelx():
+    API_KEY = 'cf97d8ed-7d4e-441d-9fd4-8501f2472a72'
+    return render_template("/",api_key=API_KEY) 
 
 
 # Login & Registration
