@@ -1,4 +1,4 @@
-cff-version: 0.1
+cff-version: 1.2.0
 message: "Si usas este software, por favor citar."
 authors:
 - family-names: "Báez"
@@ -10,4 +10,4 @@ title: "OSINATOR"
 version: 0.1
 doi: 10.5281/zenodo.8191518
 date-released: 2023-07-28
-url: "https://github.com/shyhotboy01/osinator.git"  
+repository-code: "https://github.com/shyhotboy01/osinator.git"
