@@ -20,16 +20,17 @@ from flask import url_for
 from flask_login import current_user
 from flask_login import login_user
 from flask_login import logout_user
-
+import pdb
 app = Flask(__name__)
 app.secret_key = "123"
 
-SHODAN_API_KEY = "CMvpTE95D2drxmkjmYAELhXepcAqdl3M"
+SHODAN_API_KEY = "PWFZawvyVkHrFLubYoGUJ8F5uivL9AoS"
+#SHODAN_API_KEY = "CMvpTE95D2drxmkjmYAELhXepcAqdl3M"
 shodan_api = shodan.Shodan(SHODAN_API_KEY)
-
+# variable para guardar datos del usuario y confirmar si existe uno
+user_log = 0
 
 # TODO Comments to clarify everything
-
 
 @blueprint.route("/", methods=["POST", "GET"])  # VirusTotal
 def route_default():
@@ -56,6 +57,16 @@ def route_default():
     else:
         return redirect(url_for("authentication_blueprint.login"))
 
+@blueprint.route('/profile.html',methods=["POST", "GET"])
+def profile():
+    #Confirmo si existe el usuario tambien esta en las lineas 80 y 134
+    if not user_log: 
+       return redirect(url_for("authentication_blueprint.login"))
+    if request.method == "POST":
+        return render_template('/home/profile.html',user = user_log)
+    else:
+        return render_template('/home/profile.html',user = user_log)
+
 
 # Search Bar
 @blueprint.route("/home/search.html")
@@ -65,7 +76,9 @@ def search():
 
 # TODO: Create Graphics about everything in shodan
 @blueprint.route("/geo_ip_search.html", methods=["POST", "GET"])
-def shodan():
+def shodan1():
+    if not user_log: 
+       return redirect(url_for("authentication_blueprint.login"))
     if request.method == "POST":
         shodan_search = request.form["content"]
         results = shodan_api.host(shodan_search)
@@ -97,11 +110,11 @@ def shodan():
             hosts = "Fallo Host"
 
         result_dict = {
-            "ip": [ip],
-            "city": [city],
-            "isp": [isp],
-            "country": [country],
-            "hosts": [hosts],
+            "ip": ip,
+            "city": city,
+            "isp": isp,
+            "country": country,
+            "hosts": hosts,
         }
 
         try:
@@ -115,9 +128,11 @@ def shodan():
     else:
         return render_template("/home/geo_ip_search.html")
 
-
+#esta parte esta comentada, ya no aparece en la vista (posible uso futuro)
 @blueprint.route("/home/tables.html", methods=["POST", "GET"])
 def scan():
+    if not user_log: 
+       return redirect(url_for("authentication_blueprint.login"))
     if request.method == "POST":
         shodan_search = request.form["content"]
         results = shodan_api.search(shodan_search)
@@ -159,20 +174,24 @@ def login():
         # read form data
         username = request.form["username"]
         password = request.form["password"]
-
+        
         # Locate user
         user = Users.query.filter_by(username=username).first()
-
+        
         # Check the password
         if user and verify_pass(password, user.password):
             login_user(user)
+            #proceso para que user_log obtenga el usuario
+            global user_log;
+            query = db.text(f"SELECT id, username, email FROM Users WHERE username = '{user}'")  
+            user_log = db.engine.connect().execute(query).first()
             return redirect(url_for("authentication_blueprint.route_default"))
 
         # Something (user or pass) is not ok
         return render_template(
             "accounts/login.html", msg="Wrong user or password", form=login_form
         )
-
+    
     if not current_user.is_authenticated:
         return render_template("accounts/login.html", form=login_form)
     return redirect(url_for("home_blueprint.index"))
@@ -242,12 +261,12 @@ def unauthorized_handler():
 def access_forbidden(error):
     return render_template("home/page-403.html"), 403
 
-
+# url es para que en vez de volver a la pagina / vuelva a la que estaba antes de provocarse en error 
 @blueprint.errorhandler(404)
 def not_found_error(error):
-    return render_template("home/page-404.html"), 404
+    return render_template("home/page-404.html",url=request.base_url), 404
 
 
 @blueprint.errorhandler(500)
 def internal_error(error):
-    return render_template("home/page-500.html"), 500
+    return render_template("home/page-500.html",url=request.base_url), 500

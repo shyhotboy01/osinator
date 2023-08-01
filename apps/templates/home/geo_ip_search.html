@@ -3,7 +3,25 @@
 {% block title %} Billing {% endblock title %}
 
 <!-- Specific CSS goes HERE -->
-{% block stylesheets %}{% endblock stylesheets %}
+{% block stylesheets %}
+<!--Estilos para los inputs del form y los resultados-->
+<style>
+  input[type="submit"]{
+    background-color: #2dcea8;
+    border: 1px solid #0d6dfd96;
+    border-radius: 5px;
+    color: white;
+  }
+  
+  .resultado{
+    padding: 1rem;
+  }
+  .resultado h6, .resultado span{
+    font-weight: bold;
+  }
+
+</style>
+{% endblock stylesheets %}
 
 {% block content %}
 
@@ -103,38 +121,39 @@
         </div>
       </div>
 
-                <h1 style="text-align: center; margin-top: 250px;">OSINT Shodan</h1>
-                <div class="form text-center" style="margin-top: 20px">
-                    <form action="/geo_ip_search.html" method="POST">
-                        <input type="text" name="content" id="content">
-                        <input type="submit" value="Search">
-                    </form>
-                </div>
+      <div>
+          <h1 style="text-align: center; margin-top: 250px;">OSINT Shodan</h1>
+          <div class="form text-center" style="margin-top: 20px">
+              <form action="/geo_ip_search.html" method="POST">
+                  <input type="text" name="content" id="content">
+                  <input type="submit" value="Search">
+              </form>
+          </div>
+      </div>
+      <div class="card-body pt-4 p-3">
+        {% if ip %}
+        <ul class="list-group">
+          <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
+            <div class="d-flex flex-column resultado">
+              <h6 class="mb-3 text-sm">Resultado</h6>
+              <span class="mb-2 text-xs">IP:<span class="text-dark font-weight-bold ms-2">{{ ip }}</span></span>
+              <span class="mb-2 text-xs">City:  <span class="text-dark ms-2 font-weight-bold">{{ city }}</span></span>
+              <span class="mb-2 text-xs">ISP: <span class="text-dark ms-2 font-weight-bold">{{ isp }}</span></span>
+              <span class="mb-2 text-xs">Country: <span class="text-dark ms-2 font-weight-bold">{{ country }}</span></span>
+              <span class="mb-2 text-xs">Host: <span class="text-dark ms-2 font-weight-bold">{{ hosts }}</span></span>
             </div>
-            <div class="card-body pt-4 p-3">
-              <ul class="list-group">
-                <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
-                  <div class="d-flex flex-column">
-                    <h6 class="mb-3 text-sm">Resultado</h6>
-                    <span class="mb-2 text-xs">IP:<span class="text-dark font-weight-bold ms-sm-2">{{ ip }}</span></span>
-                    <span class="mb-2 text-xs">City:  <span class="text-dark ms-sm-2 font-weight-bold">{{ city }}</span></span>
-                    <span class="mb-2 text-xs">ISP: <span class="text-dark ms-sm-2 font-weight-bold">{{ isp }}</span></span>
-                    <span class="mb-2 text-xs">Country: <span class="text-dark ms-sm-2 font-weight-bold">{{ country }}</span></span>
-                    <span class="mb-2 text-xs">Host: <span class="text-dark ms-sm-2 font-weight-bold">{{ hosts }}</span></span>
-                  </div>
-                  {{ iframe|safe }}
-                </form>
+            {{ iframe|safe }}
+          </li>
+        </ul>
+        {% endif %}
+      </div>
 
-                </li>
-                <li class="list-group-item border-0 d-flex p-4 mb-2 mt-3 bg-gray-100 border-radius-lg">
-                </li>
-              </ul>
 
-      {% include "includes/footer.html" %}
 
     </div>
 
   </main>
+  {% include "includes/footer.html" %}
 
 {% endblock content %}
 
