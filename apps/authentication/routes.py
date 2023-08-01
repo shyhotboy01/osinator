@@ -20,7 +20,7 @@ from flask import url_for
 from flask_login import current_user
 from flask_login import login_user
 from flask_login import logout_user
-import pdb
+#import pdb #sirve para debuguear
 app = Flask(__name__)
 app.secret_key = "123"
 
@@ -29,7 +29,6 @@ SHODAN_API_KEY = "PWFZawvyVkHrFLubYoGUJ8F5uivL9AoS"
 shodan_api = shodan.Shodan(SHODAN_API_KEY)
 # variable para guardar datos del usuario y confirmar si existe uno
 user_log = 0
-
 
 
 @blueprint.route("/", methods=["POST", "GET"])  # VirusTotal

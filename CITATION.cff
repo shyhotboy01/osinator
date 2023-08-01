@@ -4,8 +4,8 @@ authors:
 - family-names: "Báez"
   given-names: "Jan"
   orcid: "https://orcid.org/0009-0006-2430-1213"
-- family-names: "Bryan"
-  given-names: "Gil"
+- family-names: "Gil"
+  given-names: "Bryan"
 title: "OSINATOR"
 version: 0.1
 doi: 10.5281/zenodo.8191518
