@@ -30,7 +30,7 @@ shodan_api = shodan.Shodan(SHODAN_API_KEY)
 # variable para guardar datos del usuario y confirmar si existe uno
 user_log = 0
 
-# TODO Comments to clarify everything
+
 
 @blueprint.route("/", methods=["POST", "GET"])  # VirusTotal
 def route_default():
@@ -161,6 +161,13 @@ def scan():
             return "Error"
     else:
         return render_template("/home/tables.html")
+    
+# Intel X
+
+@blueprint.route("/")
+def intelx():
+    API_KEY = 'cf97d8ed-7d4e-441d-9fd4-8501f2472a72'
+    return render_template("/",api_key=API_KEY) 
 
 
 # Login & Registration
