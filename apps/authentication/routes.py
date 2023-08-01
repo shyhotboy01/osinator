@@ -49,7 +49,7 @@ def route_default():
 
         try:
             return render_template(
-                template_name_or_list="/home/index.html", score=score, columns=columns, submmited=[submmited] 
+                template_name_or_list="/home/index.html", score=score, columns=columns, url=submmited 
             )
         except Exception:
             return "Ha habido un problema"
