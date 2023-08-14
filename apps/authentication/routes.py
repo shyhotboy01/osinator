@@ -165,7 +165,7 @@ def scan():
 
 @blueprint.route("/")
 def intelx():
-    API_KEY = 'cf97d8ed-7d4e-441d-9fd4-8501f2472a72'
+    API_KEY = '568172d5-e797-4445-a3c3-781718f0de59'
     return render_template("/",api_key=API_KEY) 
 
 
